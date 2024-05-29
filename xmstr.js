@@ -2,7 +2,7 @@
 
 let count = prompt('Введите количество объектов')
 
-let row = document.querySelector('.xmstr .row')
+let row = document.querySelector('.main .center .row')
 
 // создание объектов
 
