@@ -4,6 +4,22 @@ let count = prompt('Введите количество объектов')
 
 let row = document.querySelector('.main .center .row')
 
+// кнопки меню
+
+let startButton = document.querySelector('.header .start')
+let editButton = document.querySelector('.header .edit')
+let addButton = document.querySelector('.header .add')
+let clearButton = document.querySelector('.header .clear')
+let saveButton = document.querySelector('.header .save')
+let loadButton = document.querySelector('.header .load')
+
+startButton.onclick = function () {start()}
+editButton.onclick = function () {alert('edit')}
+addButton.onclick = function () {alert('add')}
+clearButton.onclick = function () {clear()}
+saveButton.onclick = function () {alert('save')}
+loadButton.onclick = function () {load()}
+
 // создание объектов
 
 for (let i = 0; i < count; i++)
