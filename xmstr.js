@@ -1,6 +1,6 @@
 // программа для анализа объектов в HAMSTER KOMBAT (telegram, may, 2024)
 
-let count = prompt('Введите количество объектов')
+let count = prompt('Введите количество объектов' + '\n' + 'Либо нажмите Отмена и загрузите готовый массив')
 
 let row = document.querySelector('.main .center .row')
 
@@ -13,14 +13,7 @@ let clearButton = document.querySelector('.header .clear')
 let saveButton = document.querySelector('.header .save')
 let loadButton = document.querySelector('.header .load')
 
-startButton.onclick = function () {start()}
-editButton.onclick = function () {alert('edit')}
-addButton.onclick = function () {alert('add')}
-clearButton.onclick = function () {clear()}
-saveButton.onclick = function () {alert('save')}
-loadButton.onclick = function () {load()}
-
-// создание объектов
+// создание объектов, если count указан и больше нуля.
 
 for (let i = 0; i < count; i++)
 {
@@ -73,7 +66,8 @@ function coef_min ()
       }
     }
   }
-  if (elems[x].parentElement.style.backgroundColor != 'red') {
+  if (elems[x].parentElement.style.backgroundColor != 'red')
+  {
     elems[x].parentElement.style.backgroundColor = 'rgb(0, 255, 0)'
     console.log('Минимальный коэффициент: ' + min + ', позиция: ' + (x + 1))
   } else {
@@ -98,7 +92,8 @@ function coef_max ()
       }
     }
   }
-  if (elems[x].parentElement.style.backgroundColor != 'red') {
+  if (elems[x].parentElement.style.backgroundColor != 'red')
+  {
     console.log('Максимальный коэффициент: ' + max + ', позиция: ' + (x + 1))
   } else {
     console.log('Ошибка!')
@@ -122,8 +117,9 @@ function price_min ()
       }
     }
   }
-  if (elems[x].parentElement.style.backgroundColor != 'red') {
-    console.log('Самый дешевый товар стоит ' + min_price + ', позиция: ' + (x + 1))
+  if (elems[x].parentElement.style.backgroundColor != 'red')
+  {
+    console.log('Самый дешевый товар стоит: ' + min_price + ', позиция: ' + (x + 1))
   } else {
     console.log('Ошибка!')
   }
@@ -146,8 +142,9 @@ function price_max ()
       }
     }
   }
-  if (elems[x].parentElement.style.backgroundColor != 'red') {
-    console.log('Самый дорогой товар стоит ' + max_price + ', позиция: ' + (x + 1))
+  if (elems[x].parentElement.style.backgroundColor != 'red')
+  {
+    console.log('Самый дорогой товар стоит: ' + max_price + ', позиция: ' + (x + 1))
   } else {
     console.log('Ошибка!')
   }
@@ -170,8 +167,9 @@ function profit_min ()
       }
     }
   }
-  if (elems[x].parentElement.style.backgroundColor != 'red') {
-    console.log('Самая низкая прибыль ' + min_profit + ', позиция: ' + (x + 1))
+  if (elems[x].parentElement.style.backgroundColor != 'red')
+  {
+    console.log('Самая низкая прибыль: ' + min_profit + ', позиция: ' + (x + 1))
   } else {
     console.log('Ошибка!')
   }
@@ -194,8 +192,9 @@ function profit_max ()
       }
     }
   }
-  if (elems[x].parentElement.style.backgroundColor != 'red') {
-      console.log('Самая высокая прибыль ' + max_profit + ', позиция: ' + x + 1)
+  if (elems[x].parentElement.style.backgroundColor != 'red')
+  {
+      console.log('Самая высокая прибыль: ' + max_profit + ', позиция: ' + x + 1)
   } else {
     console.log('Ошибка!')
   }
@@ -212,6 +211,8 @@ function start ()
   price_min()
   profit_max()
   profit_min()
+  average_profit()
+  average_price()
 }
 
 // очистка стилей объектов
@@ -263,6 +264,7 @@ function add (x, profit, price)
   // обновление переменной elem для корректной работы
   elems = document.querySelectorAll('.row .item .item-center')
   objects = document.querySelectorAll('.row .item')
+  suka()
 }
 
 // загрузка сохраненного массива
@@ -292,10 +294,21 @@ function load ()
     elems = document.querySelectorAll('.row .item .item-center')
     objects = document.querySelectorAll('.row .item')
   }
-  objects.forEach(object => {
-  object.addEventListener('click', function handleClick(event) {
-    if (object.style.backgroundColor != 'rgb(0, 255, 0)') {
-      if (object.style.backgroundColor != 'red') {
+  suka()
+}
+
+// продолжение
+
+function suka ()
+{
+  objects.forEach(object =>
+    {
+  object.addEventListener('click', function handleClick(event)
+  {
+    if (object.style.backgroundColor != 'rgb(0, 255, 0)')
+    {
+      if (object.style.backgroundColor != 'red')
+      {
         object.setAttribute('style', 'background-color: red;');
       } else {
         object.setAttribute('style', 'background-color: darkgrey;');
@@ -309,22 +322,81 @@ function load ()
   });
 }
 
-// продолжение
+suka()
 
-objects.forEach(object => {
-object.addEventListener('click', function handleClick(event) {
-  if (object.style.backgroundColor != 'rgb(0, 255, 0)') {
-    if (object.style.backgroundColor != 'red') {
-      object.setAttribute('style', 'background-color: red;');
-    } else {
-      object.setAttribute('style', 'background-color: darkgrey;');
+startButton.onclick = function () {start()}
+clearButton.onclick = function () {clear()}
+loadButton.onclick = function () {load()}
+
+// функция создания нового объекта
+
+addButton.onclick = function ()
+{
+    let information = prompt('Введи позицию, доход и цену через пробел.')
+    if (information != null)
+    {
+      let splitInformation = information.split(' ')
+      if (splitInformation.length == 3)
+      {
+        add(Number(splitInformation[0]), Number(splitInformation[1]), Number(splitInformation[2]))
+      }
     }
-  } else {
-    object.setAttribute('style', 'background-color: darkgrey;');
+}
+
+// функция изменения объекта
+
+editButton.onclick = function ()
+{
+    let information = prompt('Введите позицию объекта, новый доход и новую цену через пробел.')
+    if (information != null)
+    {
+        let splitInformation = information.split(' ')
+        if (splitInformation.length == 3)
+        {
+          edit(Number(splitInformation[0]), Number(splitInformation[1]), Number(splitInformation[2]))
+        }
+    }
+}
+
+// функция выдачи массива для сохранения
+
+let footer = document.querySelector('.footer .foo-center')
+
+saveButton.onclick = function save()
+{
+  if (elems.length > 0)
+  {
+    for (let i = 0; i < elems.length; i++)
+    {
+      let newP = document.createElement('p')
+      newP.textContent = '[' + elems[i].children[0].textContent + ', ' + elems[i].children[1].textContent + ', ' + elems[i].children[2].textContent + '],'
+      footer.append(newP)
+    }
   }
-  elems = document.querySelectorAll('.row .item .item-center')
-  objects = document.querySelectorAll('.row .item')
-  });
-});
+}
+
+// функция вычисления средней прибыли, игнорирует объекты в блоке*
+
+function average_profit ()
+{
+  let amount = 0
+  for (let i = 0; i < elems.length; i++)
+  {
+    amount += Number(elems[i].children[1].textContent)
+  }
+  console.log('Средняя прибыль: ' + (amount/elems.length))
+}
+
+// функция вычисления средней цены, игнорирует объекты в блоке*
+
+function average_price ()
+{
+  let amount = 0
+  for (let i = 0; i < elems.length; i++)
+  {
+    amount += Number(elems[i].children[2].textContent)
+  }
+  console.log('Средняя цена: ' + (amount/elems.length))
+}
 
 // сохранение массива в файле data.js
