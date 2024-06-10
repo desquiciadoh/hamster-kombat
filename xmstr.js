@@ -332,7 +332,7 @@ loadButton.onclick = function () {load()}
 
 addButton.onclick = function ()
 {
-    let information = prompt('Введи позицию, доход и цену через пробел.')
+    let information = prompt('Введи позицию, доход и цену через пробел.' + '\n' + 'Может не надо? Я рот ебал этот add. Просто массив измени')
     if (information != null)
     {
       let splitInformation = information.split(' ')
@@ -397,6 +397,20 @@ function average_price ()
     amount += Number(elems[i].children[2].textContent)
   }
   console.log('Средняя цена: ' + (amount/elems.length))
+}
+
+// средний коэффициент
+
+function average_coef ()
+{
+  let price = 0
+  let profit = 0
+  for (let i = 0; i < elems.length; i++)
+  {
+    price += Number(elems[i].children[2].textContent)
+    profit += Number(elems[i].children[1].textContent)
+  }
+  console.log('Средний коэффициент: ' + (price / profit))
 }
 
 // сохранение массива в файле data.js
